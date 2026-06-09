@@ -145,16 +145,23 @@ describe('getWindLevel', () => {
 // formatDate 测试
 // ============================================================================
 
+function getLocalDateStr(date) {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 describe('formatDate', () => {
   it('应该返回今天', () => {
-    const today = new Date().toISOString().split('T')[0]
+    const today = getLocalDateStr(new Date())
     expect(formatDate(today)).toBe('今天')
   })
 
   it('应该返回明天', () => {
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
-    const tomorrowStr = tomorrow.toISOString().split('T')[0]
+    const tomorrowStr = getLocalDateStr(tomorrow)
     expect(formatDate(tomorrowStr)).toBe('明天')
   })
 
@@ -162,7 +169,7 @@ describe('formatDate', () => {
     // 测试一个固定的未来日期
     const futureDate = new Date()
     futureDate.setDate(futureDate.getDate() + 5)
-    const result = formatDate(futureDate.toISOString().split('T')[0])
+    const result = formatDate(getLocalDateStr(futureDate))
 
     // 应该包含月/日格式和星期
     expect(result).toMatch(/\d+\/\d+\s周[一二三四五六日]/)
