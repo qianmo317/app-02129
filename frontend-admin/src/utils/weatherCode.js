@@ -77,6 +77,18 @@ export function getWindLevel(speed) {
 }
 
 /**
+ * 获取本地时区的 YYYY-MM-DD 格式日期字符串
+ * @param {Date} date - 日期对象
+ * @returns {string} 格式化后的日期字符串 YYYY-MM-DD
+ */
+function getLocalDateStr(date) {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+/**
  * 格式化日期
  * @param {string} dateStr - 日期字符串 YYYY-MM-DD
  * @returns {string} 格式化后的日期
@@ -88,8 +100,8 @@ export function formatDate(dateStr) {
   tomorrow.setDate(tomorrow.getDate() + 1)
 
   const dateOnly = dateStr
-  const todayStr = today.toISOString().split('T')[0]
-  const tomorrowStr = tomorrow.toISOString().split('T')[0]
+  const todayStr = getLocalDateStr(today)
+  const tomorrowStr = getLocalDateStr(tomorrow)
 
   if (dateOnly === todayStr) return '今天'
   if (dateOnly === tomorrowStr) return '明天'
