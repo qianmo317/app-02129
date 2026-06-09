@@ -326,7 +326,7 @@ export async function getWeather(latitude, longitude) {
         latitude,
         longitude,
         current: 'temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m',
-        daily: 'weather_code,temperature_2m_max,temperature_2m_max',
+        daily: 'weather_code,temperature_2m_max,temperature_2m_min',
         timezone: 'auto',
         forecast_days: 4
       }
@@ -349,7 +349,7 @@ export async function getWeather(latitude, longitude) {
         date,
         weatherCode: data.daily.weather_code[index],
         tempMax: Math.round(data.daily.temperature_2m_max[index]),
-        tempMin: Math.round(data.daily.temperature_2m_max[index])
+        tempMin: Math.round(data.daily.temperature_2m_min[index])
       }))
     }
 
