@@ -87,9 +87,16 @@ export function formatDate(dateStr) {
   const tomorrow = new Date(today)
   tomorrow.setDate(tomorrow.getDate() + 1)
 
+  const toLocalDateStr = (d) => {
+    const y = d.getFullYear()
+    const m = String(d.getMonth() + 1).padStart(2, '0')
+    const day = String(d.getDate()).padStart(2, '0')
+    return `${y}-${m}-${day}`
+  }
+
   const dateOnly = dateStr
-  const todayStr = today.toISOString().split('T')[0]
-  const tomorrowStr = tomorrow.toISOString().split('T')[0]
+  const todayStr = toLocalDateStr(today)
+  const tomorrowStr = toLocalDateStr(tomorrow)
 
   if (dateOnly === todayStr) return '今天'
   if (dateOnly === tomorrowStr) return '明天'
